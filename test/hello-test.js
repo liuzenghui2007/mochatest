@@ -1,5 +1,6 @@
 const assert = require('assert');
 const sum = require('../hello');
+const fs = require('fs')
 
 describe('#hello.js', () => {
     describe('#sum()', () => {
@@ -19,20 +20,20 @@ describe('#hello.js', () => {
             console.log('  afterEach.');
         });
 
-        it('sum() should return 0', () => {
-            assert.strictEqual(sum(), 0);
+        // 可以测试同步函数，传入无参数函数即可
+        it('test sync function', function () {
+            // TODO:
+            assert(true);
         });
-
-        it('sum(1) should return 1', () => {
-            assert.strictEqual(sum(1), 1);
-        });
-
-        it('sum(1, 2) should return 3', () => {
-            assert.strictEqual(sum(1, 2), 3);
-        });
-
-        it('sum(1, 2, 3) should return 6', () => {
-            assert.strictEqual(sum(1, 2, 3), 6);
+        // 测试异步函数,读取文件
+        it('test async function', function (done) {
+            fs.readFile('./data.txt', function (err, data) {
+                if (err) {
+                    done(err);
+                } else {
+                    done();
+                }
+            });
         });
     });
 });
